@@ -18,7 +18,7 @@ else:
 if last_month_food > this_month_food:
     print('This is {} percent less than last month'.format(percent_food))
 elif this_month_food > last_month_food:
-    print('This is{} percent more than last month'.format(percent_food))
+    print('This is {} percent more than last month'.format(percent_food))
 else:
     print('There is no different percent in the amount of money you have spent on food')
 
