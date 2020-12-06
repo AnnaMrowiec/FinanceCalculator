@@ -1,5 +1,6 @@
 import sys
 import xlsxwriter
+import pandas as pd 
 
 
 # Food calculator 
@@ -71,6 +72,7 @@ print('\n')
 # Sum of monthly expenses
 this_month_sum = this_month_food + this_month_apartment + this_month_gastro
 last_month_sum = last_month_food + last_month_apartment + last_month_gastro
+difference_sum = last_month_sum - this_month_sum
 percent_sum = round((this_month_sum/last_month_sum*100)-100, 2)
 if this_month_sum == last_month_sum:
     print('You have spent this month exactly the same amount of money as last month')
@@ -84,27 +86,28 @@ permission = str(input('Do you wish to save your calculations in the XLS file? Y
 if permission == 'n':
     exit
 elif permission == 'y':
-    str(input('Confirm creating XLS file. Y/N   '))
+    df = pd.DataFrame({'This Month Food': [this_month_food],
+                        'Last Month Food': [last_month_food],
+                        'Food Difference': [difference_food],
+                        'Food Percent': [percent_food],
+                        'This Month Apartment': [this_month_apartment],
+                        'Last Month Apartment': [last_month_apartment],
+                        'Apartment Difference': [difference_apartment],
+                        'Apartment Percent': [percent_apartment],
+                        'This Month Gastro': [this_month_gastro],
+                        'Last Month Gastro': [last_month_gastro],
+                        'Gastro Difference': [difference_gastro],
+                        'Gastro Percent': [percent_gastro],
+                        'Last Month Sum': [last_month_sum],
+                        'This Month Sum': [this_month_sum],
+                        'Sum Difference': [difference_sum],
+                        'Sum Percent': [percent_sum]})
 
-# # Creating an Excel document summing up the calculator
-#  wb = xlsxwriter.Workbook('Finance.xlsx')
+    writer = pd.ExcelWriter('finance_calculator.xlsx', engine='xlsxwriter')
 
-#  sheet_1 = wb.add_worksheet()
-#  sheet_1.write(0, 0, this_month_food)
-#  sheet_1.write(0, 1, last_month_food)
-#  sheet_1.write(0, 2, difference_food)
-#  sheet_1.write(0, 3, percent_food)
+    df.to_excel(writer, sheet_name='Finance_calculator')
 
-#  sheet_2 = wb.add_worksheet()
-#  sheet_2.write(0, 0, this_month_apartment)
-#  sheet_2.write(0, 1, last_month_apartment)
-#  sheet_2.write(0, 2, difference_apartment)
-#  sheet_2.write(0, 3, percent_apartment)
-
-#  sheet_3 = wb.add_worksheet()
-#  sheet_3.write(0, 0, this_month_gastro)
-#  sheet_3.write(0, 1, last_month_gastro)
-#  sheet_3.write(0, 2, difference_gastro)
-#  sheet_3.write(0, 3, percent_gastro)
-
+    writer.save()
+    print('\n')
+    print('Your finances have been saved. Thank you for using the finance calculator')
  
