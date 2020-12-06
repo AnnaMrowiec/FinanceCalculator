@@ -1,5 +1,4 @@
 import sys
-import xlsxwriter
 import pandas as pd 
 
 
@@ -81,9 +80,13 @@ elif this_month_sum > last_month_sum:
 elif last_month_sum > this_month_sum:
     print('This month you have spent {} instead of {}. That is {} percent less than the last month'.format(this_month_sum, last_month_sum, percent_sum))
 
+print('\n')
+
 #Getting permission to saave it to Excel file
 permission = str(input('Do you wish to save your calculations in the XLS file? Y/N   '))
+print('\n')
 if permission == 'n':
+    print('Thank you for using finance calculator. Good bye.')
     exit
 elif permission == 'y':
     df = pd.DataFrame({'This Month Food': [this_month_food],
@@ -104,10 +107,9 @@ elif permission == 'y':
                         'Sum Percent': [percent_sum]})
 
     writer = pd.ExcelWriter('finance_calculator.xlsx', engine='xlsxwriter')
-
+    
     df.to_excel(writer, sheet_name='Finance_calculator')
 
     writer.save()
-    print('\n')
     print('Your finances have been saved. Thank you for using the finance calculator')
  
