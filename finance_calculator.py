@@ -1,4 +1,6 @@
 import sys
+import xlsxwriter
+
 
 # Food calculator 
 this_month_food = int(input('How much did you spent on food this month?   '))
@@ -14,7 +16,7 @@ else:
     print("This month you have spent exactly the same amount of money as last month")
 
 if last_month_food > this_month_food:
-    print('This is {} percent less last month'.format(percent_food))
+    print('This is {} percent less than last month'.format(percent_food))
 elif this_month_food > last_month_food:
     print('This is{} percent more than last month'.format(percent_food))
 else:
@@ -40,7 +42,7 @@ if last_month_apartment > this_month_apartment:
 elif this_month_apartment> last_month_apartment:
     print('This month you have spent {} percent more than last month'.format(percent_apartment))
 else:
-    print('There is no different percent in the amount of money you have spent on food')
+    print('There is no different percent in the amount of money you have spent on apartment')
 
 print('\n')
 
@@ -58,7 +60,7 @@ else:
     print("This month you have spent exactly the same amount of money as last month")
 
 if last_month_gastro> this_month_gastro:
-    print('This is {} percent less last month'.format(percent_gastro))
+    print('This is {} percent less than last month'.format(percent_gastro))
 elif this_month_gastro> last_month_gastro:
     print('This is {} percent more than last month'.format(percent_gastro))
 else:
@@ -76,3 +78,33 @@ elif this_month_sum > last_month_sum:
     print('This month you have spent {} instead of {}. That is {} percent more than the last month'.format(this_month_sum, last_month_sum, percent_sum))
 elif last_month_sum > this_month_sum:
     print('This month you have spent {} instead of {}. That is {} percent less than the last month'.format(this_month_sum, last_month_sum, percent_sum))
+
+#Getting permission to saave it to Excel file
+permission = str(input('Do you wish to save your calculations in the XLS file? Y/N   '))
+if permission == 'n':
+    exit
+elif permission == 'y':
+    str(input('Confirm creating XLS file. Y/N   '))
+
+# # Creating an Excel document summing up the calculator
+#  wb = xlsxwriter.Workbook('Finance.xlsx')
+
+#  sheet_1 = wb.add_worksheet()
+#  sheet_1.write(0, 0, this_month_food)
+#  sheet_1.write(0, 1, last_month_food)
+#  sheet_1.write(0, 2, difference_food)
+#  sheet_1.write(0, 3, percent_food)
+
+#  sheet_2 = wb.add_worksheet()
+#  sheet_2.write(0, 0, this_month_apartment)
+#  sheet_2.write(0, 1, last_month_apartment)
+#  sheet_2.write(0, 2, difference_apartment)
+#  sheet_2.write(0, 3, percent_apartment)
+
+#  sheet_3 = wb.add_worksheet()
+#  sheet_3.write(0, 0, this_month_gastro)
+#  sheet_3.write(0, 1, last_month_gastro)
+#  sheet_3.write(0, 2, difference_gastro)
+#  sheet_3.write(0, 3, percent_gastro)
+
+ 
